@@ -1,0 +1,413 @@
+{
+  "total_apps": 100,
+  "researched_apps": 100,
+  "mcp_existing_count": 97,
+  "mcp_existing_apps": [
+    "Twenty",
+    "Salesforce",
+    "HubSpot",
+    "Pipedrive",
+    "Attio",
+    "Podio",
+    "Zoho CRM",
+    "Close",
+    "Copper",
+    "DealCloud",
+    "Intercom",
+    "Freshdesk",
+    "Front",
+    "Pylon",
+    "LiveAgent",
+    "Plain",
+    "Help Scout",
+    "Gorgias",
+    "Gladly",
+    "Slack",
+    "Twilio",
+    "Zoho Cliq",
+    "Lark (Larksuite)",
+    "Pumble",
+    "Discord",
+    "Telegram",
+    "Aircall",
+    "Vonage",
+    "Google Ads",
+    "Meta Ads",
+    "LinkedIn Ads",
+    "GoHighLevel",
+    "Mailchimp",
+    "Klaviyo",
+    "systeme.io",
+    "Pinterest",
+    "Threads (Meta)",
+    "SendGrid",
+    "Shopify",
+    "WooCommerce",
+    "BigCommerce",
+    "Salesforce Commerce Cloud",
+    "Magento (Adobe Commerce)",
+    "Squarespace",
+    "Ecwid",
+    "Gumroad",
+    "Amazon Selling Partner",
+    "fanbasis",
+    "DataForSEO",
+    "SE Ranking",
+    "Ahrefs",
+    "MrScraper",
+    "Apify",
+    "Firecrawl",
+    "Bright Data",
+    "Sherlock",
+    "Clay",
+    "GitHub",
+    "Vercel",
+    "Netlify",
+    "Cloudflare",
+    "Supabase",
+    "Neo4j",
+    "Snowflake",
+    "MongoDB Atlas",
+    "Datadog",
+    "Sentry",
+    "Notion",
+    "Airtable",
+    "Linear",
+    "Jira",
+    "Asana",
+    "Monday.com",
+    "ClickUp",
+    "Coda",
+    "Smartsheet",
+    "Harvest",
+    "Stripe",
+    "Plaid",
+    "Binance",
+    "Paygent Connect",
+    "iPayX",
+    "QuickBooks",
+    "Xero",
+    "Brex",
+    "Ramp",
+    "PitchBook",
+    "NotebookLM",
+    "Otter AI",
+    "Fathom",
+    "Consensus",
+    "Reducto",
+    "Devin",
+    "higgsfield",
+    "Mermaid CLI",
+    "YouTube Transcript",
+    "Grain"
+  ],
+  "self_serve_count": 87,
+  "category_mcp": {
+    "CRM and Sales": 10,
+    "Support and Helpdesk": 9,
+    "Communications and Messaging": 9,
+    "Marketing, Ads, Email and Social": 10,
+    "Ecommerce": 10,
+    "Data, SEO and Scraping": 9,
+    "Developer, Infra and Data platforms": 10,
+    "Productivity and Project Management": 10,
+    "Finance and Fintech": 10,
+    "AI, Research and Media-native": 10
+  },
+  "category_self_serve": {
+    "CRM and Sales": 9,
+    "Support and Helpdesk": 9,
+    "Communications and Messaging": 10,
+    "Marketing, Ads, Email and Social": 8,
+    "Ecommerce": 7,
+    "Data, SEO and Scraping": 8,
+    "Developer, Infra and Data platforms": 10,
+    "Productivity and Project Management": 10,
+    "Finance and Fintech": 7,
+    "AI, Research and Media-native": 9
+  },
+  "category_counts": {
+    "CRM and Sales": 10,
+    "Support and Helpdesk": 10,
+    "Communications and Messaging": 10,
+    "Marketing, Ads, Email and Social": 10,
+    "Ecommerce": 10,
+    "Data, SEO and Scraping": 10,
+    "Developer, Infra and Data platforms": 10,
+    "Productivity and Project Management": 10,
+    "Finance and Fintech": 10,
+    "AI, Research and Media-native": 10
+  },
+  "unserved_gated_apps": [
+    "Waterfall.io"
+  ],
+  "auth_distribution": {
+    "api_key": 71,
+    "oauth2": 62,
+    "basic_auth": 11,
+    "custom_token": 9,
+    "jwt": 5,
+    "none": 2,
+    "unknown": 1
+  },
+  "access_distribution": {
+    "free_signup": 52,
+    "unknown": 17,
+    "freemium": 16,
+    "paid_plan_required": 9,
+    "sales_contact_required": 5,
+    "invite_only": 1
+  },
+  "api_quality_distribution": {
+    "rich_rest": 93,
+    "graphql": 3,
+    "unknown": 2,
+    "limited_rest": 1,
+    "no_public_api": 1
+  },
+  "buildable_distribution": {
+    "yes_easy": 86,
+    "yes_hard": 12,
+    "no_blocked": 2
+  },
+  "category_access": {
+    "CRM and Sales": {
+      "unknown": 3,
+      "free_signup": 4,
+      "freemium": 2,
+      "paid_plan_required": 1
+    },
+    "Support and Helpdesk": {
+      "unknown": 8,
+      "free_signup": 2
+    },
+    "Communications and Messaging": {
+      "free_signup": 7,
+      "freemium": 2,
+      "paid_plan_required": 1
+    },
+    "Marketing, Ads, Email and Social": {
+      "free_signup": 6,
+      "invite_only": 1,
+      "unknown": 2,
+      "sales_contact_required": 1
+    },
+    "Ecommerce": {
+      "free_signup": 6,
+      "paid_plan_required": 1,
+      "sales_contact_required": 2,
+      "freemium": 1
+    },
+    "Data, SEO and Scraping": {
+      "freemium": 5,
+      "free_signup": 3,
+      "paid_plan_required": 1,
+      "unknown": 1
+    },
+    "Developer, Infra and Data platforms": {
+      "free_signup": 7,
+      "paid_plan_required": 1,
+      "unknown": 1,
+      "freemium": 1
+    },
+    "Productivity and Project Management": {
+      "free_signup": 8,
+      "paid_plan_required": 1,
+      "freemium": 1
+    },
+    "Finance and Fintech": {
+      "free_signup": 6,
+      "freemium": 1,
+      "sales_contact_required": 2,
+      "paid_plan_required": 1
+    },
+    "AI, Research and Media-native": {
+      "unknown": 2,
+      "paid_plan_required": 2,
+      "free_signup": 3,
+      "freemium": 3
+    }
+  },
+  "category_buildable": {
+    "CRM and Sales": {
+      "yes_easy": 9,
+      "yes_hard": 1
+    },
+    "Support and Helpdesk": {
+      "yes_easy": 9,
+      "yes_hard": 1
+    },
+    "Communications and Messaging": {
+      "yes_easy": 10
+    },
+    "Marketing, Ads, Email and Social": {
+      "yes_hard": 3,
+      "yes_easy": 7
+    },
+    "Ecommerce": {
+      "yes_easy": 7,
+      "yes_hard": 2,
+      "no_blocked": 1
+    },
+    "Data, SEO and Scraping": {
+      "yes_easy": 8,
+      "yes_hard": 2
+    },
+    "Developer, Infra and Data platforms": {
+      "yes_easy": 10
+    },
+    "Productivity and Project Management": {
+      "yes_easy": 10
+    },
+    "Finance and Fintech": {
+      "yes_easy": 7,
+      "yes_hard": 2,
+      "no_blocked": 1
+    },
+    "AI, Research and Media-native": {
+      "yes_easy": 9,
+      "yes_hard": 1
+    }
+  },
+  "top_blockers": [
+    [
+      "api key creation requires workspace admin access",
+      1
+    ],
+    [
+      "oauth2.0 app registration requires contacting partners@copper.com (not self-serve)",
+      1
+    ],
+    [
+      "requires admin-enabled api key or client credentials",
+      1
+    ],
+    [
+      "enterprise plan required",
+      1
+    ],
+    [
+      "admin privileges required to create api token for private use",
+      1
+    ],
+    [
+      "requires a gladly account",
+      1
+    ],
+    [
+      "requires admin to create an api user role account",
+      1
+    ],
+    [
+      "tokens tied to specific environment (sandbox/production)",
+      1
+    ],
+    [
+      "requires permission approval",
+      1
+    ],
+    [
+      "api addon must be installed on the workspace before generating a key",
+      1
+    ]
+  ],
+  "easy_wins": [
+    "Salesforce",
+    "Podio",
+    "Intercom",
+    "Klaviyo",
+    "Shopify",
+    "Sentry",
+    "Notion",
+    "Asana",
+    "Smartsheet",
+    "Xero",
+    "Pipedrive",
+    "Front",
+    "Pylon",
+    "LiveAgent",
+    "Gorgias",
+    "Lark (Larksuite)",
+    "Vonage",
+    "Mailchimp",
+    "SendGrid",
+    "Squarespace",
+    "SE Ranking",
+    "Firecrawl",
+    "Sherlock",
+    "GitHub",
+    "Cloudflare",
+    "Neo4j",
+    "Snowflake",
+    "Datadog",
+    "Jira",
+    "ClickUp",
+    "Coda",
+    "Stripe",
+    "Binance",
+    "iPayX",
+    "Devin",
+    "Freshdesk",
+    "DataForSEO",
+    "Bright Data",
+    "Monday.com",
+    "Attio",
+    "Zoho CRM",
+    "Zendesk",
+    "Plain",
+    "Help Scout",
+    "Twilio",
+    "Telegram",
+    "WhatsApp Business",
+    "GoHighLevel",
+    "systeme.io",
+    "WooCommerce",
+    "BigCommerce",
+    "Ecwid",
+    "Gumroad",
+    "MrScraper",
+    "Vercel",
+    "Netlify",
+    "Supabase",
+    "MongoDB Atlas",
+    "Airtable",
+    "Linear",
+    "Plaid",
+    "Fathom",
+    "Consensus",
+    "Reducto",
+    "higgsfield",
+    "Twenty",
+    "HubSpot",
+    "Close",
+    "Zoho Cliq",
+    "Pumble",
+    "Discord",
+    "Aircall",
+    "Meta Ads",
+    "Threads (Meta)",
+    "fanbasis",
+    "Apify",
+    "Harvest",
+    "QuickBooks",
+    "YouTube Transcript",
+    "Grain",
+    "Copper",
+    "Slack",
+    "Clay",
+    "NotebookLM",
+    "Paygent Connect",
+    "Mermaid CLI"
+  ],
+  "low_confidence_apps": [],
+  "headline_insights": [
+    "62% of apps (62/100) support OAuth2.",
+    "86/100 apps are buildable today with an easy, self-serve integration path.",
+    "An MCP server was discoverable for 97/100 apps (97%) \u2014 but this counts official, community and aggregator (e.g. Zapier MCP) servers alike. The scarce thing is no longer 'an MCP exists', it is a maintained, first-party one.",
+    "87/100 apps let a developer self-serve credentials with no sales call or partner approval (13 need a human in the loop before a connector can even be tested).",
+    "2/100 apps are currently blocked from having a connector built.",
+    "The most common blocker is \"api key creation requires workspace admin access\" (1 app affected).",
+    "Ecommerce is the most gated category (30% require payment or sales contact).",
+    "Support and Helpdesk is the most open category (100% freely accessible)."
+  ]
+}

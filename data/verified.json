@@ -1,3 +1,162 @@
 {
-  "_instructions": "Delete this key. Add one entry per manually-checked app, e.g.: \"Slack\": {\"auth_methods\": [\"oauth2\"], \"access_model\": \"free_signup\", \"api_quality\": \"rich_rest\", \"buildable_today\": \"yes_easy\"}. Pick 15-20 apps, open their real docs, fill this in by hand, then run: python -m src.verification.verify"
+  "Salesforce": {
+    "auth_methods": ["oauth2", "jwt"],
+    "access_model": "free_signup",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/quickstart_dev_org.htm",
+    "human_note": "developer.salesforce.com returned 403 to my fetcher so I worked from the indexed REST/SOAP quickstart pages; free Developer Edition gives instant REST+SOAP+Bulk access, but real production API access needs Enterprise/Unlimited edition, so 'free_signup' is arguably generous. SOAP still exists alongside REST, but REST is the primary documented surface."
+  },
+  "Attio": {
+    "auth_methods": ["api_key", "oauth2"],
+    "access_model": "freemium",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://docs.attio.com/rest-api/overview",
+    "human_note": "Attio recently moved docs from developers.attio.com to docs.attio.com and several deep links 404; confirmed via the docs llms.txt index that both bearer access tokens and a full OAuth 2.0 flow (authorize/token/introspect/revoke) exist. Pricing page lists API and webhook access on every plan including Free."
+  },
+  "Zendesk": {
+    "auth_methods": ["oauth2", "api_key", "basic_auth"],
+    "access_model": "paid_plan_required",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://developer.zendesk.com/api-reference/introduction/security-and-auth/",
+    "human_note": "Judgement call on auth: the docs now push OAuth and label API tokens deprecated, but API tokens are still documented and are transported via HTTP basic auth (email/token:token), so I counted both api_key and basic_auth; email+password basic auth is no longer a supported method. No free plan, only a 14-day trial, hence paid_plan_required."
+  },
+  "Plain": {
+    "auth_methods": ["api_key"],
+    "access_model": "paid_plan_required",
+    "api_quality": "graphql",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://www.plain.com/docs/api-reference/graphql",
+    "human_note": "GraphQL-only and unusually complete: docs state Plain itself is built on the same API so there is nothing the UI can do that the API cannot. Pricing lists API/webhooks under Extensibility with no visible plan gate, but there is no free tier (7-day trial only), so API access effectively requires a paid plan."
+  },
+  "Slack": {
+    "auth_methods": ["oauth2"],
+    "access_model": "free_signup",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://docs.slack.dev/authentication/tokens",
+    "human_note": "Debatable auth list: bot/user tokens are OAuth-issued, but Slack also documents app-level tokens (xapp-), workflow, configuration and service tokens that are minted outside the OAuth flow, which could justify adding custom_token. I recorded oauth2 only since OAuth 2.0 is the documented way apps obtain credentials."
+  },
+  "Aircall": {
+    "auth_methods": ["oauth2", "basic_auth"],
+    "access_model": "paid_plan_required",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://developers.aircall.io/api-references",
+    "human_note": "Docs name exactly two methods: Basic Auth with an api_id/api_token pair for customers, and OAuth 2.0 for technology partners (registration required). The api_id/api_token pair is arguably an api_key delivered over basic auth. No free plan and a 3-licence minimum; some endpoints (e.g. Analytics exports) need an extra entitlement."
+  },
+  "Klaviyo": {
+    "auth_methods": ["api_key", "oauth2"],
+    "access_model": "freemium",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://developers.klaviyo.com/en/reference/api_overview",
+    "human_note": "Three documented schemes that collapse to two enum values: private API keys (pk_) and public keys/company ID for client-side endpoints both map to api_key, plus full OAuth 2.0 for tech partners. Free plan (250 profiles, 500 sends/month) keeps the standard integration surface, so freemium rather than paid."
+  },
+  "Threads (Meta)": {
+    "auth_methods": ["oauth2"],
+    "access_model": "free_signup",
+    "api_quality": "limited_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://developers.facebook.com/docs/threads/get-started",
+    "human_note": "Genuinely debatable quality call: it is a well-documented Graph-API-style REST surface but narrow (publishing, replies/moderation, insights, mentions, keyword search), so I called it limited_rest rather than rich_rest. Self-serve for your own account via Threads tester invites, but every permission needs App Review before other users can authorise, so buildable_today is easy only for single-account use."
+  },
+  "Shopify": {
+    "auth_methods": ["oauth2", "api_key"],
+    "access_model": "free_signup",
+    "api_quality": "graphql",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://shopify.dev/docs/api/admin-graphql",
+    "human_note": "The Admin API reference is now GraphQL-only with REST legacy/deprecated, so graphql is correct today even though older material describes a rich REST API. Free Partner account plus unlimited free dev stores gives instant self-serve credentials; custom-app admin access tokens are the api_key path, OAuth is for distributed apps. A production storefront does need a paid Shopify plan."
+  },
+  "Gumroad": {
+    "auth_methods": ["oauth2", "api_key"],
+    "access_model": "free_signup",
+    "api_quality": "limited_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://app.gumroad.com/api",
+    "human_note": "gumroad.com/api rendered as an empty shell to my fetcher, so I verified via indexed content of the same docs: REST+JSON, OAuth 2.0 applications at /oauth/applications with token exchange at api.gumroad.com/oauth/token, and a self-generated access token on the app page (the api_key path). Endpoint surface is narrow (products, variants, sales, subscribers, licences, payouts) hence limited_rest."
+  },
+  "Ahrefs": {
+    "auth_methods": ["api_key", "oauth2"],
+    "access_model": "paid_plan_required",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://docs.ahrefs.com/",
+    "human_note": "Two surfaces: API v3 with a bearer API key from Account Settings, and Ahrefs Connect OAuth for third-party apps. Access model needed judgement: the docs offer free test queries and API units now ship with Lite/Standard/Advanced subscriptions, but there is no free tier and units are metered, so paid_plan_required. SCIM user management remains Enterprise-only."
+  },
+  "Firecrawl": {
+    "auth_methods": ["api_key"],
+    "access_model": "freemium",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://docs.firecrawl.dev/api-reference/introduction",
+    "human_note": "Simple bearer API key (fc- prefix), no OAuth documented. 1,000 free credits per month refreshed with no credit card, plus self-serve paid tiers, so cleanly freemium."
+  },
+  "GitHub": {
+    "auth_methods": ["api_key", "oauth2", "jwt", "basic_auth"],
+    "access_model": "free_signup",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://docs.github.com/en/rest/authentication/authenticating-to-the-rest-api",
+    "human_note": "Longest honest auth list here: personal access tokens (api_key), OAuth apps, GitHub Apps signing a JWT to mint installation tokens, and basic auth using client ID/secret for a few app endpoints. Username+password is explicitly unsupported. GitHub also ships a first-class GraphQL API, but REST is the broader documented surface so I kept rich_rest."
+  },
+  "Snowflake": {
+    "auth_methods": ["oauth2", "jwt"],
+    "access_model": "paid_plan_required",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating",
+    "human_note": "SQL API docs list exactly three schemes: OAuth 2.0, key-pair JWT, and workload identity federation (cloud/OIDC tokens, which has no clean enum match and I folded into oauth2/jwt rather than inventing a value). Access model is a judgement call: the 30-day credit trial is fully self-serve, but there is no permanently free tier and pricing is consumption-based."
+  },
+  "Notion": {
+    "auth_methods": ["api_key", "oauth2"],
+    "access_model": "freemium",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://developers.notion.com/docs/authorization",
+    "human_note": "Conflicting sources and the one I most want flagged: the pricing comparison chart reads as if Public API and webhooks are paid-plan features, while developer docs and corroborating sources say internal integrations and PATs work on a free workspace. I recorded freemium; 'paid_plan_required' is defensible if you trust the pricing grid. Three token flavours (installation tokens, PATs, OAuth) collapse to api_key + oauth2."
+  },
+  "Linear": {
+    "auth_methods": ["api_key", "oauth2"],
+    "access_model": "freemium",
+    "api_quality": "graphql",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://linear.app/developers/graphql",
+    "human_note": "Confirmed GraphQL-only and explicitly the same API Linear uses internally. The public docs do not state plan gating for API keys, so freemium rests on corroborating sources plus the absence of any documented restriction; workspace admins can disable member-created keys."
+  },
+  "Stripe": {
+    "auth_methods": ["api_key", "oauth2"],
+    "access_model": "free_signup",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_easy",
+    "evidence_url": "https://docs.stripe.com/api/authentication",
+    "human_note": "Docs note keys are transmitted via HTTP basic auth (key as username) or bearer header, which could technically justify basic_auth; I followed the convention that Stripe is api_key + OAuth for Connect. Test-mode secret keys are usable instantly, live mode needs business details."
+  },
+  "Ramp": {
+    "auth_methods": ["oauth2"],
+    "access_model": "sales_contact_required",
+    "api_quality": "rich_rest",
+    "buildable_today": "yes_hard",
+    "evidence_url": "https://support.ramp.com/hc/en-us/articles/46681939909907-Accessing-the-Developer-API",
+    "human_note": "Hardest access_model call in the set. OAuth 2.0 only (client credentials for your own org, authorization code for third parties) and app creation is self-serve in the Ramp dashboard for admins, but you must already be an onboarded Ramp business customer, sandbox needs an access request form, and production access for third-party integrations requires Ramp to approve an application. 'free_signup' would be wrong and 'paid_plan_required' misleading since Ramp's core product is free, so I chose sales_contact_required."
+  },
+  "NotebookLM": {
+    "auth_methods": ["none"],
+    "access_model": "sales_contact_required",
+    "api_quality": "no_public_api",
+    "buildable_today": "no_blocked",
+    "evidence_url": "https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/docs/api-notebooks",
+    "human_note": "The most debatable row in the file. Consumer NotebookLM has no public API and no documented credentials, which is what I recorded. However Google does document a Preview REST API (OAuth bearer via gcloud, notebook/source CRUD, audio overviews) under the separately-licensed Gemini Notebook Enterprise, formerly NotebookLM Enterprise. If you treat that as the same app, the honest answer flips to oauth2 / limited_rest / yes_hard."
+  },
+  "Otter AI": {
+    "auth_methods": ["api_key"],
+    "access_model": "sales_contact_required",
+    "api_quality": "limited_rest",
+    "buildable_today": "yes_hard",
+    "evidence_url": "https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API",
+    "human_note": "help.otter.ai returned 403 to my fetcher, so this row rests on indexed content of that exact help-centre article rather than a direct read. It describes a bearer-token Public API restricted to Enterprise workspaces (contact your account manager if not visible), max 2 keys per user, 10 req/s. Read-oriented surface (channels, conversations, transcripts, audio, action items, insights, outlines, webhooks) so limited_rest, though rich_rest is arguable."
+  }
 }

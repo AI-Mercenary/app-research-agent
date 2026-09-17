@@ -1,0 +1,820 @@
+{
+  "ground_truth_apps": [
+    "Ahrefs",
+    "Aircall",
+    "Attio",
+    "Firecrawl",
+    "GitHub",
+    "Gumroad",
+    "Klaviyo",
+    "Linear",
+    "NotebookLM",
+    "Notion",
+    "Otter AI",
+    "Plain",
+    "Ramp",
+    "Salesforce",
+    "Shopify",
+    "Slack",
+    "Snowflake",
+    "Stripe",
+    "Threads (Meta)",
+    "Zendesk"
+  ],
+  "passes": {
+    "pass1_before_fixes": {
+      "apps_in_ground_truth": 20,
+      "apps_scored": 20,
+      "apps_fully_correct": 0,
+      "app_level_accuracy_pct": 0.0,
+      "field_level_accuracy_pct": 35.0,
+      "fields_graded": 80,
+      "fields_correct": 28,
+      "field_accuracy": {
+        "auth_methods": 15.0,
+        "access_model": 20.0,
+        "api_quality": 45.0,
+        "buildable_today": 60.0
+      },
+      "details": [
+        {
+          "app": "Salesforce",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "unknown"
+              ],
+              "actually": [
+                "oauth2",
+                "jwt"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "free_signup"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "unknown",
+              "actually": "rich_rest"
+            },
+            {
+              "field": "buildable_today",
+              "agent_said": "no_blocked",
+              "actually": "yes_easy"
+            }
+          ]
+        },
+        {
+          "app": "Attio",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "api_key",
+                "oauth2"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "freemium"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "limited_rest",
+              "actually": "rich_rest"
+            }
+          ]
+        },
+        {
+          "app": "Zendesk",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2",
+                "api_key"
+              ],
+              "actually": [
+                "oauth2",
+                "api_key",
+                "basic_auth"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "freemium",
+              "actually": "paid_plan_required"
+            }
+          ]
+        },
+        {
+          "app": "Plain",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "api_key"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "paid_plan_required"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "unknown",
+              "actually": "graphql"
+            },
+            {
+              "field": "buildable_today",
+              "agent_said": "yes_hard",
+              "actually": "yes_easy"
+            }
+          ]
+        },
+        {
+          "app": "Slack",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2",
+                "api_key"
+              ],
+              "actually": [
+                "oauth2"
+              ]
+            }
+          ]
+        },
+        {
+          "app": "Aircall",
+          "mismatches": [
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "paid_plan_required"
+            }
+          ]
+        },
+        {
+          "app": "Klaviyo",
+          "mismatches": [
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "freemium"
+            }
+          ]
+        },
+        {
+          "app": "Threads (Meta)",
+          "mismatches": [
+            {
+              "field": "api_quality",
+              "agent_said": "rich_rest",
+              "actually": "limited_rest"
+            }
+          ]
+        },
+        {
+          "app": "Shopify",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "oauth2",
+                "api_key"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "freemium",
+              "actually": "free_signup"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "rich_rest",
+              "actually": "graphql"
+            },
+            {
+              "field": "buildable_today",
+              "agent_said": "yes_hard",
+              "actually": "yes_easy"
+            }
+          ]
+        },
+        {
+          "app": "Gumroad",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "unknown"
+              ],
+              "actually": [
+                "oauth2",
+                "api_key"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "free_signup"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "unknown",
+              "actually": "limited_rest"
+            },
+            {
+              "field": "buildable_today",
+              "agent_said": "no_blocked",
+              "actually": "yes_easy"
+            }
+          ]
+        },
+        {
+          "app": "Ahrefs",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "api_key"
+              ],
+              "actually": [
+                "api_key",
+                "oauth2"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "freemium",
+              "actually": "paid_plan_required"
+            }
+          ]
+        },
+        {
+          "app": "Firecrawl",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "none",
+                "oauth2",
+                "api_key"
+              ],
+              "actually": [
+                "api_key"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "free_signup",
+              "actually": "freemium"
+            }
+          ]
+        },
+        {
+          "app": "GitHub",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "api_key",
+                "oauth2",
+                "jwt",
+                "basic_auth"
+              ]
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "unknown",
+              "actually": "rich_rest"
+            }
+          ]
+        },
+        {
+          "app": "Snowflake",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2",
+                "custom_token"
+              ],
+              "actually": [
+                "oauth2",
+                "jwt"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "paid_plan_required"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "unknown",
+              "actually": "rich_rest"
+            },
+            {
+              "field": "buildable_today",
+              "agent_said": "no_blocked",
+              "actually": "yes_easy"
+            }
+          ]
+        },
+        {
+          "app": "Notion",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "api_key",
+                "oauth2"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "free_signup",
+              "actually": "freemium"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "unknown",
+              "actually": "rich_rest"
+            }
+          ]
+        },
+        {
+          "app": "Linear",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2",
+                "api_key",
+                "custom_token"
+              ],
+              "actually": [
+                "api_key",
+                "oauth2"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "free_signup",
+              "actually": "freemium"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "rich_rest",
+              "actually": "graphql"
+            }
+          ]
+        },
+        {
+          "app": "Stripe",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "api_key",
+                "oauth2"
+              ]
+            }
+          ]
+        },
+        {
+          "app": "Ramp",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "unknown"
+              ],
+              "actually": [
+                "oauth2"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "sales_contact_required"
+            },
+            {
+              "field": "buildable_today",
+              "agent_said": "no_blocked",
+              "actually": "yes_hard"
+            }
+          ]
+        },
+        {
+          "app": "NotebookLM",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "custom_token"
+              ],
+              "actually": [
+                "none"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "sales_contact_required"
+            },
+            {
+              "field": "buildable_today",
+              "agent_said": "yes_hard",
+              "actually": "no_blocked"
+            }
+          ]
+        },
+        {
+          "app": "Otter AI",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "api_key"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "free_signup",
+              "actually": "sales_contact_required"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "rich_rest",
+              "actually": "limited_rest"
+            },
+            {
+              "field": "buildable_today",
+              "agent_said": "yes_easy",
+              "actually": "yes_hard"
+            }
+          ]
+        }
+      ]
+    },
+    "final": {
+      "apps_in_ground_truth": 20,
+      "apps_scored": 20,
+      "apps_fully_correct": 1,
+      "app_level_accuracy_pct": 5.0,
+      "field_level_accuracy_pct": 65.0,
+      "fields_graded": 80,
+      "fields_correct": 52,
+      "field_accuracy": {
+        "auth_methods": 40.0,
+        "access_model": 55.0,
+        "api_quality": 75.0,
+        "buildable_today": 90.0
+      },
+      "details": [
+        {
+          "app": "Salesforce",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "oauth2",
+                "jwt"
+              ]
+            }
+          ]
+        },
+        {
+          "app": "Attio",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2",
+                "api_key",
+                "basic_auth"
+              ],
+              "actually": [
+                "api_key",
+                "oauth2"
+              ]
+            }
+          ]
+        },
+        {
+          "app": "Zendesk",
+          "mismatches": [
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "paid_plan_required"
+            }
+          ]
+        },
+        {
+          "app": "Plain",
+          "mismatches": [
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "paid_plan_required"
+            }
+          ]
+        },
+        {
+          "app": "Slack",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2",
+                "api_key"
+              ],
+              "actually": [
+                "oauth2"
+              ]
+            }
+          ]
+        },
+        {
+          "app": "Aircall",
+          "mismatches": [
+            {
+              "field": "access_model",
+              "agent_said": "freemium",
+              "actually": "paid_plan_required"
+            }
+          ]
+        },
+        {
+          "app": "Klaviyo",
+          "mismatches": [
+            {
+              "field": "access_model",
+              "agent_said": "free_signup",
+              "actually": "freemium"
+            }
+          ]
+        },
+        {
+          "app": "Threads (Meta)",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2",
+                "api_key"
+              ],
+              "actually": [
+                "oauth2"
+              ]
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "rich_rest",
+              "actually": "limited_rest"
+            }
+          ]
+        },
+        {
+          "app": "Shopify",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "oauth2",
+                "api_key"
+              ]
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "rich_rest",
+              "actually": "graphql"
+            }
+          ]
+        },
+        {
+          "app": "Gumroad",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "oauth2",
+                "api_key"
+              ]
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "rich_rest",
+              "actually": "limited_rest"
+            }
+          ]
+        },
+        {
+          "app": "Ahrefs",
+          "mismatches": [
+            {
+              "field": "buildable_today",
+              "agent_said": "yes_hard",
+              "actually": "yes_easy"
+            }
+          ]
+        },
+        {
+          "app": "Firecrawl",
+          "mismatches": []
+        },
+        {
+          "app": "GitHub",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "api_key",
+                "jwt"
+              ],
+              "actually": [
+                "api_key",
+                "oauth2",
+                "jwt",
+                "basic_auth"
+              ]
+            }
+          ]
+        },
+        {
+          "app": "Snowflake",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "jwt",
+                "oauth2",
+                "custom_token"
+              ],
+              "actually": [
+                "oauth2",
+                "jwt"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "paid_plan_required"
+            }
+          ]
+        },
+        {
+          "app": "Notion",
+          "mismatches": [
+            {
+              "field": "access_model",
+              "agent_said": "free_signup",
+              "actually": "freemium"
+            }
+          ]
+        },
+        {
+          "app": "Linear",
+          "mismatches": [
+            {
+              "field": "access_model",
+              "agent_said": "free_signup",
+              "actually": "freemium"
+            }
+          ]
+        },
+        {
+          "app": "Stripe",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "api_key",
+                "basic_auth"
+              ],
+              "actually": [
+                "api_key",
+                "oauth2"
+              ]
+            }
+          ]
+        },
+        {
+          "app": "Ramp",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2",
+                "basic_auth"
+              ],
+              "actually": [
+                "oauth2"
+              ]
+            }
+          ]
+        },
+        {
+          "app": "NotebookLM",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "oauth2"
+              ],
+              "actually": [
+                "none"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "unknown",
+              "actually": "sales_contact_required"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "unknown",
+              "actually": "no_public_api"
+            },
+            {
+              "field": "buildable_today",
+              "agent_said": "yes_easy",
+              "actually": "no_blocked"
+            }
+          ]
+        },
+        {
+          "app": "Otter AI",
+          "mismatches": [
+            {
+              "field": "auth_methods",
+              "agent_said": [
+                "api_key",
+                "oauth2"
+              ],
+              "actually": [
+                "api_key"
+              ]
+            },
+            {
+              "field": "access_model",
+              "agent_said": "paid_plan_required",
+              "actually": "sales_contact_required"
+            },
+            {
+              "field": "api_quality",
+              "agent_said": "rich_rest",
+              "actually": "limited_rest"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "improvement": {
+    "before_pct": 35.0,
+    "after_pct": 65.0,
+    "delta_pct": 30.0
+  }
+}

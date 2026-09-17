@@ -4,3 +4,9 @@ __pycache__/
 .venv/
 venv/
 .langgraph_api/
+learning.md
+*.log
+data/_old_wrong_dataset/
+# 87MB Langfuse telemetry export — evidence, but far too large to version
+data/*lf-events-export*.json
+data/_results_before_searchfix.json

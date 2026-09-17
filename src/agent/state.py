@@ -28,7 +28,10 @@ class AppResearch(BaseModel):
     description: str = Field(description="One sentence: what the app does")
     auth_methods: list[AuthMethod] = Field(default_factory=list)
     access_model: AccessModel = "unknown"
+    self_serve: bool = Field(default=False, description="True if a developer can get credentials themselves for free/trial, without sales/admin approval")
     api_quality: ApiQuality = "unknown"
+    has_mcp: bool = Field(default=False, description="True if the app already has a known/published MCP server")
+    mcp_notes: str = Field(default="", description="Where the existing MCP was found, or why none was found")
     buildable_today: Buildable = "no_blocked"
     blockers: list[str] = Field(default_factory=list)
     source_url: str = ""
@@ -41,6 +44,7 @@ class AgentState(TypedDict, total=False):
     category: str
     query: str
     search_results: list[dict]
+    mcp_results: list[dict]
     scraped_content: str
     scraped_urls: list[str]
     extraction: Optional[AppResearch]

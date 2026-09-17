@@ -10,7 +10,11 @@ from __future__ import annotations
 
 from langgraph.graph import END, StateGraph
 
-from src.agent.prompts import SEARCH_QUERY_RETRY_TEMPLATE, SEARCH_QUERY_TEMPLATE
+from src.agent.prompts import (
+    MCP_QUERY_TEMPLATE,
+    SEARCH_QUERY_RETRY_TEMPLATE,
+    SEARCH_QUERY_TEMPLATE,
+)
 from src.agent.state import AgentState
 from src.agent.tools import extract_info, scrape_url, search_web
 
@@ -19,29 +23,62 @@ CONFIDENCE_THRESHOLD = 0.6
 MAX_SCRAPE_URLS = 3
 
 
+MAX_MCP_URLS = 2
+
+
 def node_search_web(state: AgentState) -> AgentState:
     query = state.get("query") or SEARCH_QUERY_TEMPLATE.format(app_name=state["app_name"])
     try:
         results = search_web(query)
     except Exception as e:
         return {**state, "search_results": [], "error": f"search_failed: {e}"}
-    return {**state, "search_results": results, "error": None}
+
+    # Separate, narrower search for MCP existence. Merged into one evidence pool
+    # but kept distinct from the docs query so neither crowds the other out.
+    mcp_results = []
+    try:
+        mcp_results = search_web(MCP_QUERY_TEMPLATE.format(app_name=state["app_name"]), max_results=MAX_MCP_URLS)
+    except Exception:
+        pass
+
+    return {**state, "search_results": results, "mcp_results": mcp_results, "error": None}
+
+
+AD_REDIRECT_MARKERS = ("bing.com/aclick", "google.com/aclk", "googleadservices.com")
+
+
+def _usable(results: list[dict], limit: int) -> list[dict]:
+    return [
+        r for r in results
+        if r.get("href") and not any(m in r["href"] for m in AD_REDIRECT_MARKERS)
+    ][:limit]
 
 
 def node_scrape_docs(state: AgentState) -> AgentState:
-    results = state.get("search_results") or []
-    urls = [r["href"] for r in results if r.get("href")][:MAX_SCRAPE_URLS]
+    docs = _usable(state.get("search_results") or [], MAX_SCRAPE_URLS)
+    mcp = _usable(state.get("mcp_results") or [], MAX_MCP_URLS)
+    seen = {r["href"] for r in docs}
+    mcp = [r for r in mcp if r["href"] not in seen]
+
     chunks = []
     ok_urls = []
-    for url in urls:
-        try:
-            text = scrape_url(url)
+    # Budget per source rather than truncating the concatenation: MCP evidence is
+    # appended last, so a single trailing cut silently discarded it every time and
+    # made has_mcp look false for apps that plainly have a server.
+    for label, group, budget in (("API DOCS", docs, 1500), ("MCP SEARCH RESULT", mcp, 700)):
+        for r in group:
+            url = r["href"]
+            text = r.get("text")  # pre-fetched server-side; no local scrape needed
+            if not text:
+                try:
+                    text = scrape_url(url)
+                except Exception:
+                    continue
             if text:
-                chunks.append(f"=== {url} ===\n{text}")
-                ok_urls.append(url)
-        except Exception:
-            continue
-    return {**state, "scraped_content": "\n\n".join(chunks), "scraped_urls": ok_urls}
+                chunks.append(f"=== [{label}] {url} ===\n{text[:budget]}")
+                if label == "API DOCS":
+                    ok_urls.append(url)
+    return {**state, "scraped_content": "\n\n".join(chunks), "scraped_urls": ok_urls or [r["href"] for r in mcp]}
 
 
 def node_extract_info(state: AgentState) -> AgentState:

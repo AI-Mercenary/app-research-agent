@@ -1,0 +1,407 @@
+{
+  "Salesforce": {
+    "app_name": "Salesforce",
+    "category": "CRM and Sales",
+    "description": "Salesforce is a CRM and Sales platform. The provided scraped content does not contain any information about Salesforce's API, authentication, access model, or MCP servers. The sources are about API rate limiting (GitHub, LinkedIn, Bitly), Bitcoin price history, and Firefox release notes.",
+    "auth_methods": [
+      "unknown"
+    ],
+    "access_model": "unknown",
+    "self_serve": false,
+    "api_quality": "unknown",
+    "has_mcp": false,
+    "mcp_notes": "No MCP server mentioned in the provided text.",
+    "buildable_today": "no_blocked",
+    "blockers": [
+      "No Salesforce API information in provided sources",
+      "Cannot verify access model or auth methods from given text"
+    ],
+    "source_url": "https://nordicapis.com/everything-you-need-to-know-about-api-rate-limiting",
+    "confidence": 0.1,
+    "notes": "The scraped content is entirely unrelated to Salesforce. It covers API rate limiting examples (GitHub, LinkedIn, Bitly), Bitcoin price history, and Firefox 88 release notes. No facts about Salesforce's public API can be extracted from this text."
+  },
+  "Attio": {
+    "app_name": "Attio",
+    "category": "CRM and Sales",
+    "description": "Attio provides a hosted Model Context Protocol (MCP) server that allows AI tools to interact with an Attio workspace via OAuth authentication. The MCP server exposes a REST\u2011style API for CRUD operations on CRM objects such as contacts, companies, deals, tasks, and notes.",
+    "auth_methods": [
+      "oauth2"
+    ],
+    "access_model": "unknown",
+    "self_serve": true,
+    "api_quality": "limited_rest",
+    "has_mcp": true,
+    "mcp_notes": "Hosted MCP server at https://mcp.attio.com/mcp",
+    "buildable_today": "yes_easy",
+    "blockers": [],
+    "source_url": "https://docs.attio.com/mcp/overview",
+    "confidence": 0.9,
+    "notes": "API access requires an active Attio workspace; the documentation does not specify whether the workspace can be created for free or requires a paid plan."
+  },
+  "Zendesk": {
+    "app_name": "Zendesk",
+    "category": "Support and Helpdesk",
+    "description": "Zendesk is a support/helpdesk platform. The provided text focuses on community MCP servers that wrap Zendesk's API. It confirms Zendesk exposes a public API supporting Help Center article search/create/update/translate, and Support ticket management (create, view, update, comments, triage, attachments). Authentication is OAuth 2.1 PKCE (per-user) and a shared admin API key is also referenced as a common integration pattern.",
+    "auth_methods": [
+      "oauth2",
+      "api_key"
+    ],
+    "access_model": "freemium",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": true,
+    "mcp_notes": "Multiple community MCP servers exist: fruggr/zendesk-mcp-server (https://github.com/fruggr/zendesk-mcp-server) and SShadowS/zendesk-mcp-server (https://github.com/SShadowS/zendesk-mcp-server). fruggr's uses OAuth 2.1 PKCE per-user auth.",
+    "buildable_today": "yes_easy",
+    "blockers": [],
+    "source_url": "https://github.com/fruggr/zendesk-mcp-server",
+    "confidence": 0.7,
+    "notes": "Text is about third-party MCP servers, not Zendesk's own official docs, so API quality and access model are inferred from the described capabilities (Help Center + Support tickets) rather than Zendesk's official API reference. Zendesk is known to be freemium with self-serve API access, but the scraped text does not explicitly state pricing or signup flow. The fruggr server emphasizes OAuth 2.1 PKCE per-user auth and notes most integrations use a shared admin API key."
+  },
+  "Plain": {
+    "app_name": "Plain",
+    "category": "Support and Helpdesk",
+    "description": "Plain provides an MCP (Model Context Protocol) server at https://mcp.plain.com/mcp that allows AI tools to connect to a Plain workspace. Authentication is via OAuth (openid and offline_access scopes). No API keys are used. Access may require enabling custom apps by an administrator.",
+    "auth_methods": [
+      "oauth2"
+    ],
+    "access_model": "unknown",
+    "self_serve": false,
+    "api_quality": "unknown",
+    "has_mcp": true,
+    "mcp_notes": "Plain MCP server at https://mcp.plain.com/mcp",
+    "buildable_today": "yes_hard",
+    "blockers": [
+      "may require admin to enable custom apps",
+      "OAuth token must include openid and offline_access scopes"
+    ],
+    "source_url": "https://help.plain.com/article/mcp-server",
+    "confidence": 0.78,
+    "notes": ""
+  },
+  "Slack": {
+    "app_name": "Slack",
+    "category": "Communications and Messaging",
+    "description": "Slack offers a public MCP server enabling integrated apps to search channels, send/retrieve messages, manage canvases, users, files, and lists via MCP clients. Workspace admins can approve and manage MCP client integrations. The MCP server provides tools for searching messages/files/users/channels/emoji, sending and reading messages, creating conversations, adding reactions, managing canvases, fetching user info, uploading files (two-step), and working with structured lists.",
+    "auth_methods": [
+      "oauth2",
+      "api_key"
+    ],
+    "access_model": "free_signup",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": true,
+    "mcp_notes": "Official Slack MCP server documented at https://docs.slack.dev/ai/slack-mcp-server. Provides tools for search, messaging, canvases, users, files, and lists. Workspace admins can approve/manage MCP client integrations.",
+    "buildable_today": "yes_easy",
+    "blockers": [
+      "Workspace admin approval required for MCP client integrations"
+    ],
+    "source_url": "https://docs.slack.dev/ai/slack-mcp-server",
+    "confidence": 0.85,
+    "notes": "The scraped text focuses on the MCP server. It mentions \"on behalf of the authenticated user\" implying OAuth2, and Slack's well-known API uses OAuth2 and API keys (bot tokens). The text does not explicitly name auth methods, so auth_methods is inferred from Slack's standard model. Access model is free_signup based on Slack's standard free workspace offering. Admin approval for MCP integrations is a soft blocker but not a hard one for self-serve developers."
+  },
+  "Aircall": {
+    "app_name": "Aircall",
+    "category": "Communications and Messaging",
+    "description": "Aircall offers a REST API with Basic Authentication (API ID and token) and OAuth2 for multi\u2011user integrations. The API is well documented with many endpoints for users, teams, calls, and campaigns.",
+    "auth_methods": [
+      "basic_auth",
+      "oauth2"
+    ],
+    "access_model": "unknown",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": false,
+    "mcp_notes": "",
+    "buildable_today": "yes_easy",
+    "blockers": [],
+    "source_url": "https://developers.aircall.io/api-references",
+    "confidence": 0.9,
+    "notes": "Access model is not explicitly stated; likely requires an Aircall account, possibly paid or trial."
+  },
+  "Klaviyo": {
+    "app_name": "Klaviyo",
+    "category": "Marketing, Ads, Email and Social",
+    "description": "Klaviyo offers REST APIs for server-side and client-side use. Server-side endpoints are authenticated with private API keys (API key) that can be scoped, or OAuth for tech partners. Client-side endpoints use a public key (site ID). API keys can be created by users with Owner, Admin, or Manager roles.",
+    "auth_methods": [
+      "api_key",
+      "oauth2"
+    ],
+    "access_model": "unknown",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": false,
+    "mcp_notes": "",
+    "buildable_today": "yes_easy",
+    "blockers": [
+      "requires account role (Owner/Admin/Manager) to create API keys"
+    ],
+    "source_url": "https://developers.klaviyo.com/en/v2026-01-15/docs/authenticate_",
+    "confidence": 0.8,
+    "notes": "OAuth is recommended for tech partners but not required for all API access."
+  },
+  "Threads (Meta)": {
+    "app_name": "Threads (Meta)",
+    "category": "Marketing, Ads, Email and Social",
+    "description": "Threads (Meta) API for reading, publishing, replying, and insights on Threads posts. Requires a Meta app with the Threads use case, OAuth 2.0 user access tokens, and specific permissions (threads_basic, threads_content_publish, threads_manage_replies, threads_read_replies, threads_manage_insights). Media must be hosted on a public server for publishing.",
+    "auth_methods": [
+      "oauth2"
+    ],
+    "access_model": "free_signup",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": false,
+    "mcp_notes": "No MCP server mentioned in the provided text.",
+    "buildable_today": "yes_easy",
+    "blockers": [
+      "App Review required for non-tester users",
+      "App must be published for general user access"
+    ],
+    "source_url": "https://developers.facebook.com/docs/threads/get-started/",
+    "confidence": 0.9,
+    "notes": "App Review is required for non-tester users to grant permissions, and the app must be published. Permission grants for public profiles are valid for 90 days and can be refreshed."
+  },
+  "Shopify": {
+    "app_name": "Shopify",
+    "category": "Ecommerce",
+    "description": "Shopify's Customer Accounts MCP server provides tools for customer-specific actions (order management, account details) for AI assistants. It uses OAuth 2.0 authorization code flow with PKCE, with the MCP endpoint dynamically discovered from the shop's storefront domain.",
+    "auth_methods": [
+      "oauth2"
+    ],
+    "access_model": "freemium",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": true,
+    "mcp_notes": "Shopify publishes official MCP servers: Customer Accounts MCP server (https://shopify.dev/docs/apps/build/storefront-mcp/servers/customer-account) and an Order MCP server (https://shopify.dev/docs/agents/orders/order-mcp).",
+    "buildable_today": "yes_hard",
+    "blockers": [
+      "requires Level 2 protected customer data (PII) access approval from Shopify Partner dashboard",
+      "requires custom domain configured",
+      "must meet protected customer data requirements"
+    ],
+    "source_url": "https://shopify.dev/docs/apps/build/storefront-mcp/servers/customer-account",
+    "confidence": 0.8,
+    "notes": "Access to the Customer Accounts MCP server is gated: requires a custom domain, meeting protected customer data requirements, completing integration steps, and requesting Level 2 protected customer data (PII) access from the Shopify Partner dashboard. So while Shopify has a self-serve developer platform, this specific MCP server has approval/PII-access prerequisites."
+  },
+  "Gumroad": {
+    "app_name": "Gumroad",
+    "category": "Ecommerce",
+    "description": "Gumroad is an ecommerce platform for selling digital products, software, and subscriptions. The provided text is a developer-oriented blog post about selling dev tools on Gumroad; it does not document a public API, authentication methods, or access model.",
+    "auth_methods": [
+      "unknown"
+    ],
+    "access_model": "unknown",
+    "self_serve": false,
+    "api_quality": "unknown",
+    "has_mcp": false,
+    "mcp_notes": "No MCP server mentioned in the provided text.",
+    "buildable_today": "no_blocked",
+    "blockers": [
+      "no public API documented in provided text",
+      "no auth/access details available"
+    ],
+    "source_url": "https://dev.to/0x1da49/how-developers-are-making-money-on-gumroad-in-the-ai-era-dj",
+    "confidence": 0.3,
+    "notes": "The only relevant source is a dev.to blog post about selling dev tools on Gumroad; it mentions Gumroad handles payments, VAT/tax, file delivery, and subscriptions, but says nothing about a public API, auth, or how to obtain credentials. The other two source URLs (agrilinks.org PDF and goodhousekeeping.com) are irrelevant/blocked and contain no Gumroad API info. No API facts can be confirmed from the given text."
+  },
+  "Ahrefs": {
+    "app_name": "Ahrefs",
+    "category": "Data, SEO and Scraping",
+    "description": "Ahrefs API v3 provides programmatic access to SEO, marketing, and AI-search data (backlinks, traffic, keywords, SERPs, rank tracking, site audits, brand/AI visibility, web/social analytics, account management). Organized into tools, each a group of REST endpoints with full OpenAPI specs. Base URL https://api.ahrefs.com/v3/{tool}/{endpoint}. Auth via API key as Bearer token; free 'public' endpoints need no key. GET requests, JSON/XML responses, select/where parameters, API-unit-based billing.",
+    "auth_methods": [
+      "api_key"
+    ],
+    "access_model": "freemium",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": true,
+    "mcp_notes": "MCP server for Ahrefs referenced at apis.io/apis/ahrefs/mcp/ and a setup guide at studiomeyer.io/en/blog/ahrefs-mcp-server-setup.",
+    "buildable_today": "yes_easy",
+    "blockers": [
+      "Most billable endpoints require an Ahrefs subscription and consume API units"
+    ],
+    "source_url": "https://docs.ahrefs.com/llms.txt",
+    "confidence": 0.9,
+    "notes": "API access appears tied to an Ahrefs subscription for most billable endpoints (API units), but free 'public' endpoints and free test queries exist and a free/public APIv3 key can be created. Self-serve key creation is documented."
+  },
+  "Firecrawl": {
+    "app_name": "Firecrawl",
+    "category": "Data, SEO and Scraping",
+    "description": "Firecrawl MCP server exposes a REST API for searching, scraping, parsing, and monitoring web content. It supports keyless access with daily limits, OAuth2 account sign\u2011in, or an API key as bearer token. The API is documented on the Firecrawl docs site and can be used immediately by developers.",
+    "auth_methods": [
+      "none",
+      "oauth2",
+      "api_key"
+    ],
+    "access_model": "free_signup",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": true,
+    "mcp_notes": "Official MCP server: https://mcp.firecrawl.dev/v2/mcp (OAuth endpoint: https://mcp.firecrawl.dev/v2/mcp-oauth)",
+    "buildable_today": "yes_easy",
+    "blockers": [],
+    "source_url": "https://docs.firecrawl.dev/mcp-server",
+    "confidence": 0.95,
+    "notes": "Keyless mode provides limited daily usage; full access requires an API key or OAuth sign\u2011in."
+  },
+  "GitHub": {
+    "app_name": "GitHub",
+    "category": "Developer, Infra and Data platforms",
+    "description": "GitHub provides a Model Context Protocol (MCP) server (both local and remote) that requires OAuth 2.1 access tokens in the Authorization header. Developers can create OAuth-enabled apps via the GitHub UI to obtain tokens.",
+    "auth_methods": [
+      "oauth2"
+    ],
+    "access_model": "free_signup",
+    "self_serve": true,
+    "api_quality": "unknown",
+    "has_mcp": true,
+    "mcp_notes": "GitHub Remote MCP Server \u2013 https://github.com/github/github-mcp-server",
+    "buildable_today": "yes_easy",
+    "blockers": [],
+    "source_url": "https://github.com/github/github-mcp-server/blob/main/docs/host-integration.md",
+    "confidence": 0.7,
+    "notes": ""
+  },
+  "Snowflake": {
+    "app_name": "Snowflake",
+    "category": "Developer, Infra and Data platforms",
+    "description": "Snowflake-managed Model Context Protocol (MCP) server for AI agents, providing a standardized interface for tool discovery and invocation with Snowflake OAuth authentication.",
+    "auth_methods": [
+      "oauth2",
+      "custom_token"
+    ],
+    "access_model": "unknown",
+    "self_serve": false,
+    "api_quality": "unknown",
+    "has_mcp": true,
+    "mcp_notes": "Snowflake-managed MCP server \u2013 https://docs.snowflake.com/en/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+    "buildable_today": "no_blocked",
+    "blockers": [
+      "requires Snowflake account"
+    ],
+    "source_url": "https://docs.snowflake.com/en/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+    "confidence": 0.6,
+    "notes": "The documentation does not specify how to obtain API credentials or whether a free trial is available; access model and self-serve status are unclear."
+  },
+  "Notion": {
+    "app_name": "Notion",
+    "category": "Productivity and Project Management",
+    "description": "Notion provides an MCP (Model Context Protocol) endpoint at https://mcp.notion.com/mcp that can be connected to via OAuth2 flow using various client tools.",
+    "auth_methods": [
+      "oauth2"
+    ],
+    "access_model": "free_signup",
+    "self_serve": true,
+    "api_quality": "unknown",
+    "has_mcp": true,
+    "mcp_notes": "Notion MCP server URL: https://mcp.notion.com/mcp",
+    "buildable_today": "yes_easy",
+    "blockers": [],
+    "source_url": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
+    "confidence": 0.85,
+    "notes": "Access model inferred as free signup based on ability to run OAuth flow without sales contact; API quality classification unclear because MCP is not a traditional REST API."
+  },
+  "Linear": {
+    "app_name": "Linear",
+    "category": "Productivity and Project Management",
+    "description": "Linear's MCP server provides a standardized interface for AI models/agents to access Linear data (issues, projects, comments). It uses Streamable HTTP transport at https://mcp.linear.app/mcp, with OAuth 2.1 (dynamic client registration) as the primary auth, plus bearer token or Linear API key options. Read-write and read-only endpoints are available.",
+    "auth_methods": [
+      "oauth2",
+      "api_key",
+      "custom_token"
+    ],
+    "access_model": "free_signup",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": true,
+    "mcp_notes": "Official Linear MCP server at https://mcp.linear.app/mcp (read-write) and https://mcp.linear.app/mcp/readonly (read-only). Centrally hosted, follows authenticated remote MCP spec. Setup pages for Claude, Cursor, VS Code, Windsurf, Zed, Codex, Jules.",
+    "buildable_today": "yes_easy",
+    "blockers": [],
+    "source_url": "https://linear.app/docs/mcp",
+    "confidence": 0.9,
+    "notes": "Text focuses on the MCP server, not the broader REST API, but the MCP exposes tools for finding/creating/updating issues, projects, and comments. Auth is OAuth 2.1 with dynamic client registration, or a Linear API key (generated in Settings > Account > Security & Access). Enterprise orgs can use Okta SAML-managed auth. No blockers for self-serve access."
+  },
+  "Stripe": {
+    "app_name": "Stripe",
+    "category": "Finance and Fintech",
+    "description": "Stripe's public documentation page for its Model Context Protocol (MCP) server, which lets AI agents interact with the Stripe API and search Stripe's knowledge base. The MCP server is in public preview and uses OAuth (per the MCP spec) to authorize clients, with sessions manageable in the Stripe Dashboard.",
+    "auth_methods": [
+      "oauth2"
+    ],
+    "access_model": "free_signup",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": true,
+    "mcp_notes": "Official Stripe MCP server at https://mcp.stripe.com (public preview). Installable via `stripe agent setup` (npm @stripe/cli) or manual config in Cursor/Claude Code/ChatGPT/Codex. Uses OAuth per MCP spec.",
+    "buildable_today": "yes_easy",
+    "blockers": [
+      "MCP server is in public preview",
+      "managed/IT environments may need to allow mcp.stripe.com"
+    ],
+    "source_url": "https://docs.stripe.com/mcp",
+    "confidence": 0.85,
+    "notes": "Text focuses on the MCP server, not the broader REST API, so api_quality (rich_rest) and access_model (free_signup) are inferred from general Stripe knowledge rather than explicitly stated in this page. The page explicitly confirms OAuth for MCP auth and that the MCP server is in public preview."
+  },
+  "Ramp": {
+    "app_name": "Ramp",
+    "category": "Finance and Fintech",
+    "description": "Ramp provides a public Developer MCP server that serves documentation and OpenAPI schemas for its REST API. The actual API authentication and access model are not described in the provided text.",
+    "auth_methods": [
+      "unknown"
+    ],
+    "access_model": "unknown",
+    "self_serve": false,
+    "api_quality": "rich_rest",
+    "has_mcp": true,
+    "mcp_notes": "Developer MCP server at https://mcp.ramp.com/developer/mcp; Ramp ships three MCP servers scoped to different audiences.",
+    "buildable_today": "no_blocked",
+    "blockers": [
+      "no public API credentials info",
+      "unknown authentication method",
+      "no sign-up or plan info"
+    ],
+    "source_url": "https://docs.ramp.com/llms-guides/developer-mcp.txt",
+    "confidence": 0.6,
+    "notes": "The text does not mention how to obtain API credentials or whether the API requires authentication. It only describes an unauthenticated MCP server for documentation."
+  },
+  "NotebookLM": {
+    "app_name": "NotebookLM",
+    "category": "AI, Research and Media-native",
+    "description": "NotebookLM (Google's AI research/notebook tool) has no official public API. The provided sources document an unofficial, community-built MCP server (jacob-bd/notebooklm-mcp-cli, ~6.1k stars) that wraps NotebookLM's internal/private APIs. It exposes tools to list/create notebooks, add sources (URL, text, PDF, YouTube, Google Docs), query/ask questions, configure chat personas, get AI summaries, and export raw source content.",
+    "auth_methods": [
+      "custom_token"
+    ],
+    "access_model": "unknown",
+    "self_serve": false,
+    "api_quality": "no_public_api",
+    "has_mcp": true,
+    "mcp_notes": "Unofficial community MCP server: jacob-bd/notebooklm-mcp-cli (GitHub, ~6.1k stars). Also referenced at deepwiki.com/jacob-bd/notebooklm-mcp and roomi-fields.github.io/notebooklm-mcp.",
+    "buildable_today": "yes_hard",
+    "blockers": [
+      "no official public API",
+      "relies on undocumented internal endpoints",
+      "unofficial third-party MCP wrapper (may break)",
+      "auth mechanism not confirmed in provided text"
+    ],
+    "source_url": "https://github.com/jacob-bd/notebooklm-mcp-cli/blob/d6844f60797c4f0cc16059385fb4344ba61f9b91/docs/API_REFERENCE.md",
+    "confidence": 0.6,
+    "notes": "The documented API is explicitly described as 'internal NotebookLM APIs' \u2014 i.e., private endpoints, not an official public API. The MCP server is a third-party reverse-engineered wrapper, so it may break without notice and is not sanctioned by Google. The scraped text was truncated before the authentication section, so the exact auth mechanism (likely a browser session cookie/token) is inferred rather than confirmed."
+  },
+  "Otter AI": {
+    "app_name": "Otter AI",
+    "category": "AI, Research and Media-native",
+    "description": "Otter AI provides a REST API secured with OAuth 2.0 (client credentials and authorization code flows) and webhook verification via HMAC\u2011SHA256. The API is well documented and supports store\u2011scoped requests with X\u2011Store\u2011Id headers.",
+    "auth_methods": [
+      "oauth2"
+    ],
+    "access_model": "free_signup",
+    "self_serve": true,
+    "api_quality": "rich_rest",
+    "has_mcp": false,
+    "mcp_notes": "",
+    "buildable_today": "yes_easy",
+    "blockers": [],
+    "source_url": "https://connect.tryotter.com/docs/guides-authentication/",
+    "confidence": 0.9,
+    "notes": "App credentials are issued by an Account Representative; no explicit sales or partnership requirement is mentioned."
+  }
+}

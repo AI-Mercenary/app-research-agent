@@ -1,48 +1,49 @@
 """
-The 100 target apps, grouped by category. Category is used later for
-pattern analysis (e.g. "finance apps are mostly gated behind paid plans").
+The 100 target apps for the Composio AI Product Ops take-home, grouped by the
+exact 10 categories given in the assignment. Category is used later for
+pattern analysis (e.g. "CRM apps are mostly gated behind paid plans").
 """
 
 APPS = {
-    "Communication": [
-        "Slack", "Microsoft Teams", "Discord", "Zoom", "Twilio",
-        "SendGrid", "Mailgun", "Telegram", "WhatsApp Business", "RingCentral",
+    "CRM and Sales": [
+        "Salesforce", "HubSpot", "Pipedrive", "Attio", "Twenty",
+        "Podio", "Zoho CRM", "Close", "Copper", "DealCloud",
     ],
-    "Productivity": [
-        "Notion", "Asana", "Trello", "Monday.com", "ClickUp",
-        "Airtable", "Todoist", "Basecamp", "Confluence", "Coda",
+    "Support and Helpdesk": [
+        "Zendesk", "Intercom", "Freshdesk", "Front", "Pylon",
+        "LiveAgent", "Plain", "Help Scout", "Gorgias", "Gladly",
     ],
-    "Developer Tools": [
-        "GitHub", "GitLab", "Bitbucket", "Jira", "Linear",
-        "CircleCI", "Vercel", "Netlify", "Sentry", "PagerDuty",
+    "Communications and Messaging": [
+        "Slack", "Twilio", "Zoho Cliq", "Lark (Larksuite)", "Pumble",
+        "Discord", "Telegram", "WhatsApp Business", "Aircall", "Vonage",
     ],
-    "CRM & Sales": [
-        "Salesforce", "HubSpot", "Pipedrive", "Zoho CRM", "Close",
-        "Copper", "Freshsales", "ActiveCampaign", "Intercom", "Zendesk",
+    "Marketing, Ads, Email and Social": [
+        "Google Ads", "Meta Ads", "LinkedIn Ads", "GoHighLevel", "Mailchimp",
+        "Klaviyo", "systeme.io", "Pinterest", "Threads (Meta)", "SendGrid",
     ],
-    "Finance & Payments": [
-        "Stripe", "PayPal", "Plaid", "QuickBooks", "Xero",
-        "Square", "Brex", "Ramp", "Wise", "Adyen",
+    "Ecommerce": [
+        "Shopify", "WooCommerce", "BigCommerce", "Salesforce Commerce Cloud", "Magento (Adobe Commerce)",
+        "Squarespace", "Ecwid", "Gumroad", "Amazon Selling Partner", "fanbasis",
     ],
-    "Marketing": [
-        "Mailchimp", "Klaviyo", "Google Ads", "Facebook Ads", "Twitter/X Ads",
-        "Hootsuite", "Buffer", "Segment", "Braze", "Customer.io",
+    "Data, SEO and Scraping": [
+        "DataForSEO", "SE Ranking", "Ahrefs", "MrScraper", "Apify",
+        "Firecrawl", "Bright Data", "Sherlock", "Waterfall.io", "Clay",
     ],
-    "Cloud & Infra": [
-        "AWS", "Google Cloud Platform", "Microsoft Azure", "Cloudflare", "DigitalOcean",
-        "Heroku", "Snowflake", "Databricks", "MongoDB Atlas", "Supabase",
+    "Developer, Infra and Data platforms": [
+        "GitHub", "Vercel", "Netlify", "Cloudflare", "Supabase",
+        "Neo4j", "Snowflake", "MongoDB Atlas", "Datadog", "Sentry",
     ],
-    "E-commerce": [
-        "Shopify", "WooCommerce", "BigCommerce", "Magento", "Etsy",
-        "Amazon Seller Central", "eBay", "Wix", "Squarespace", "Printful",
+    "Productivity and Project Management": [
+        "Notion", "Airtable", "Linear", "Jira", "Asana",
+        "Monday.com", "ClickUp", "Coda", "Smartsheet", "Harvest",
     ],
-    "HR & People": [
-        "Workday", "BambooHR", "Gusto", "Greenhouse", "Lever",
-        "Rippling", "Deel", "ADP", "Namely", "Personio",
+    "Finance and Fintech": [
+        "Stripe", "Plaid", "Binance", "Paygent Connect", "iPayX",
+        "QuickBooks", "Xero", "Brex", "Ramp", "PitchBook",
     ],
-    "Productivity Suites & Storage": [
-        "Google Workspace", "Microsoft 365", "Dropbox", "Box", "OneDrive",
-        "Calendly", "DocuSign", "Miro", "Figma", "Loom",
+    "AI, Research and Media-native": [
+        "NotebookLM", "Otter AI", "Fathom", "Consensus", "Reducto",
+        "Devin", "higgsfield", "Mermaid CLI", "YouTube Transcript", "Grain",
     ],
 }
 

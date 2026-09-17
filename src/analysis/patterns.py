@@ -54,8 +54,33 @@ def analyze(results: dict) -> dict:
         key=lambda r: r.get("confidence", 0),
     )
 
+    mcp_apps = [r["app_name"] for r in apps if r.get("has_mcp")]
+    self_serve_count = sum(1 for r in apps if r.get("self_serve"))
+
+    category_mcp = {
+        cat: sum(1 for i in items if i.get("has_mcp")) for cat, items in by_category.items()
+    }
+    category_self_serve = {
+        cat: sum(1 for i in items if i.get("self_serve")) for cat, items in by_category.items()
+    }
+
+    # The cluster that matters most for Composio: gated auth *and* no existing MCP
+    unserved_gated = [
+        r["app_name"]
+        for r in apps
+        if not r.get("has_mcp") and not r.get("self_serve")
+    ]
+
     return {
         "total_apps": len(apps),
+        "researched_apps": len(results),
+        "mcp_existing_count": len(mcp_apps),
+        "mcp_existing_apps": mcp_apps,
+        "self_serve_count": self_serve_count,
+        "category_mcp": category_mcp,
+        "category_self_serve": category_self_serve,
+        "category_counts": {cat: len(items) for cat, items in by_category.items()},
+        "unserved_gated_apps": unserved_gated,
         "auth_distribution": dict(auth_counter.most_common()),
         "access_distribution": dict(access_counter.most_common()),
         "api_quality_distribution": dict(quality_counter.most_common()),
@@ -79,13 +104,28 @@ def headline_insights(stats: dict) -> list[str]:
     easy = stats["buildable_distribution"].get("yes_easy", 0)
     insights.append(f"{easy}/{n} apps are buildable today with an easy, self-serve integration path.")
 
+    mcp_n = stats.get("mcp_existing_count", 0)
+    insights.append(
+        f"An MCP server was discoverable for {mcp_n}/{n} apps ({round(100*mcp_n/n) if n else 0}%) — but this "
+        f"counts official, community and aggregator (e.g. Zapier MCP) servers alike. The scarce thing is no "
+        f"longer 'an MCP exists', it is a maintained, first-party one."
+    )
+
+    ss = stats.get("self_serve_count", 0)
+    insights.append(
+        f"{ss}/{n} apps let a developer self-serve credentials with no sales call or partner approval "
+        f"({n - ss} need a human in the loop before a connector can even be tested)."
+    )
+
     blocked = stats["buildable_distribution"].get("no_blocked", 0)
     if blocked:
         insights.append(f"{blocked}/{n} apps are currently blocked from having a connector built.")
 
     if stats["top_blockers"]:
         top = stats["top_blockers"][0]
-        insights.append(f"The most common blocker is \"{top[0]}\" ({top[1]} apps affected).")
+        insights.append(
+            f"The most common blocker is \"{top[0]}\" ({top[1]} app{'s' if top[1] != 1 else ''} affected)."
+        )
 
     # Category with highest gated (paid/sales) rate
     gated_rates = {}
