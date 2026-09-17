@@ -159,6 +159,23 @@
       </table>
     </div>
     <div id="verification" class="text-gray-200"></div>
+
+    <div class="mt-6 border-t border-[#22262f] pt-5 text-sm text-gray-400 space-y-2">
+      <div class="font-semibold text-gray-300">How to read these numbers, including where they flatter and where they punish</div>
+      <p><strong class="text-gray-300">Scoring is deliberately unforgiving.</strong> A list of auth methods counts as correct only
+      if it matches exactly. The agent saying <code>['oauth2']</code> where the docs list <code>['oauth2','jwt']</code> scores zero,
+      not half. That single rule is most of why auth sits so far below the other three fields — the agent usually finds the main
+      method and misses a secondary one. Partial credit would roughly double that figure, which is precisely why it isn't used here.</p>
+      <p><strong class="text-gray-300">Twenty apps, not a hundred.</strong> Ground truth is expensive because a person has to read
+      the docs, so the sample is 20 apps spanning all ten categories. It is enough to show a direction and catch a class of bug.
+      It is not a precise estimate of accuracy across all 100, and the confidence interval on a 20-app sample is wide.</p>
+      <p><strong class="text-gray-300">Unknowns are excluded, not forgiven.</strong> Where the human could not establish a fact from
+      the docs, the field is dropped from scoring rather than counted either way — so the agent is never credited for a question
+      nobody could answer.</p>
+      <p><strong class="text-gray-300">One caveat on provenance.</strong> An early version of this project researched a different,
+      self-assembled list of apps before the real scope arrived. That work was discarded and is not in this dataset, but it does
+      appear in the raw telemetry, so trace exports contain more app names than the hundred reported here.</p>
+    </div>
   </section>
 
   <section class="card p-6 border-l-4 border-l-amber-500">
