@@ -3,59 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Composio API Research — 100 Apps</title>
+<title>Which of these 100 apps can we connect to?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
-  body { background:#0b0d12; color:#e6e8ec; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  body { background:#0b0d12; color:#e6e8ec; font-family:'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif; }
   .card { background:#12151c; border:1px solid #22262f; border-radius:14px; }
   ::-webkit-scrollbar { height:8px; width:8px; }
   ::-webkit-scrollbar-thumb { background:#2a2f3a; border-radius:8px; }
   table th { position: sticky; top:0; background:#12151c; }
   .badge { padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600; }
+  .chart-box { position:relative; height:170px; }
+  .lede { font-size:1.05rem; line-height:1.75; }
+  h2 { letter-spacing:-0.01em; }
 </style>
 </head>
 <body class="min-h-screen px-4 py-10 md:px-10">
-<div class="max-w-7xl mx-auto space-y-10">
+<div class="max-w-6xl mx-auto space-y-10">
 
-  <header class="space-y-3">
-    <div class="text-sm uppercase tracking-widest text-indigo-400 font-semibold">Composio &middot; API Ecosystem Research</div>
-    <h1 class="text-3xl md:text-4xl font-bold">100 Apps: API Access, Auth &amp; Buildability</h1>
-    <p class="text-gray-400 max-w-3xl">A research agent built on <strong>Composio's own MCP</strong> (search + page-fetch tools),
-    orchestrated as a LangGraph state machine with Groq tool-calling, investigated the API surface of 100 apps across 10 categories:
-    how you authenticate, whether a developer can self-serve access, how good the API is, and whether an MCP server already exists.
-    Below: the patterns that matter, the honest accuracy story, and exactly where a human was required.</p>
+  <header class="space-y-4">
+    <div class="text-xs uppercase tracking-[0.2em] text-indigo-400 font-semibold">API ecosystem research &middot; 100 apps</div>
+    <h1 class="text-3xl md:text-[2.6rem] font-bold leading-tight">Which of these 100 apps<br class="hidden md:block"> can we actually connect to?</h1>
+    <p class="text-gray-400 lede max-w-3xl">Before anyone builds a connector, someone has to find out how an app's API
+    works, whether you can get a key without talking to sales, and whether somebody has already built an MCP server for it.
+    That is a day of tab-opening per handful of apps. This is what happened when an agent did it for a hundred.</p>
+    <p class="text-gray-500 text-sm max-w-3xl">The short version: most of these apps are easier to reach than expected,
+    the interesting constraint has moved, and the agent was confidently wrong often enough that the checking mattered more
+    than the research.</p>
     <div id="scorecard" class="grid grid-cols-2 md:grid-cols-5 gap-3 pt-2"></div>
   </header>
 
   <section class="card p-6">
-    <h2 class="text-xl font-bold mb-4">Headline Patterns</h2>
+    <h2 class="text-xl font-bold mb-1">What the hundred apps look like</h2>
+    <p class="text-gray-500 text-sm mb-4">Every figure below counts only rows the agent could support with a fetched source.</p>
     <ul id="insights" class="space-y-2 text-gray-200"></ul>
   </section>
 
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="card p-6">
-      <h3 class="font-semibold mb-3">Auth Method Distribution</h3>
-      <canvas id="authChart" height="220"></canvas>
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="card p-4">
+      <h3 class="text-sm font-semibold mb-2 text-gray-300">How you authenticate</h3>
+      <div class="chart-box"><canvas id="authChart"></canvas></div>
     </div>
-    <div class="card p-6">
-      <h3 class="font-semibold mb-3">Access Model Distribution</h3>
-      <canvas id="accessChart" height="220"></canvas>
+    <div class="card p-4">
+      <h3 class="text-sm font-semibold mb-2 text-gray-300">How you get access</h3>
+      <div class="chart-box"><canvas id="accessChart"></canvas></div>
     </div>
-    <div class="card p-6">
-      <h3 class="font-semibold mb-3">Buildable Today</h3>
-      <canvas id="buildableChart" height="220"></canvas>
+    <div class="card p-4">
+      <h3 class="text-sm font-semibold mb-2 text-gray-300">Could we build it today</h3>
+      <div class="chart-box"><canvas id="buildableChart"></canvas></div>
     </div>
-    <div class="card p-6">
-      <h3 class="font-semibold mb-3">Gated Rate by Category</h3>
-      <canvas id="categoryChart" height="220"></canvas>
+    <div class="card p-4">
+      <h3 class="text-sm font-semibold mb-2 text-gray-300">Gated, by category</h3>
+      <div class="chart-box"><canvas id="categoryChart"></canvas></div>
     </div>
   </section>
 
   <section class="card p-6">
-    <h2 class="text-xl font-bold mb-2">The Shape Of Each Category</h2>
-    <p class="text-gray-400 text-sm mb-4">Categories don't differ randomly — they cluster by how the
-    business sells. Read this as: where is connector surface cheap to reach, and where does a human have to negotiate for it?</p>
+    <h2 class="text-xl font-bold mb-1">Categories differ by how the business sells, not by technology</h2>
+    <p class="text-gray-400 text-sm mb-4">Messaging tools hand you a token in a minute because they want the integrations.
+    Anything sold by a salesperson makes you meet a salesperson first. Read this for where connector work is cheap,
+    and where it needs a conversation before a single line of code.</p>
     <div class="overflow-auto border border-[#22262f] rounded-lg">
       <table class="w-full text-sm">
         <thead><tr class="text-left text-gray-400 border-b border-[#22262f]">
@@ -68,7 +78,10 @@
   </section>
 
   <section class="card p-6">
-    <h2 class="text-xl font-bold mb-4">How The Agent Works</h2>
+    <h2 class="text-xl font-bold mb-1">How the research actually ran</h2>
+    <p class="text-gray-400 text-sm mb-4">One agent, run once per app, allowed to reject its own work and try again.
+    Nothing here is a language model recalling what it knows about Stripe — every field is read off a page that was fetched
+    during the run, and every row keeps the link it came from.</p>
     <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-center text-sm">
       <div class="card p-4"><div class="text-2xl mb-1">🔎</div>Two searches<br><span class="text-gray-500 text-xs"><strong class="text-indigo-300">Composio MCP</strong> <code>COMPOSIO_SEARCH_WEB</code> — one query for API docs, a separate one for MCP, so neither crowds the other out</span></div>
       <div class="card p-4"><div class="text-2xl mb-1">📄</div>Fetch Docs<br><span class="text-gray-500 text-xs"><strong class="text-indigo-300">Composio MCP</strong> <code>SEARCH_FETCH_URL_CONTENT</code> (server-side, beats bot-blocks), else httpx + BeautifulSoup</span></div>
@@ -77,9 +90,10 @@
       <div class="card p-4"><div class="text-2xl mb-1">💾</div>Save<br><span class="text-gray-500 text-xs">Incremental write, so the run is resumable after any crash</span></div>
     </div>
     <div class="mt-6 border-t border-[#22262f] pt-5">
-      <h3 class="font-semibold mb-1">Proof of execution</h3>
-      <p class="text-gray-500 text-xs mb-3">Counted from the Langfuse telemetry export for the 100 in-scope apps.
-      The retry loop is not decorative: 222 of 607 extractions were rejected by the agent's own confidence check and re-searched.</p>
+      <h3 class="font-semibold mb-1">It really ran, and here is the receipt</h3>
+      <p class="text-gray-500 text-xs mb-3">Counted from the run's own telemetry, for the 100 apps in scope. The number worth
+      noticing is 222: that many extractions were thrown out by the agent's own confidence check and searched again. The retry
+      loop earns its place.</p>
       <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center text-sm">
         <div class="card p-3"><div class="text-xl font-bold text-indigo-300">3,642</div><div class="text-[11px] text-gray-500">node executions traced</div></div>
         <div class="card p-3"><div class="text-xl font-bold text-indigo-300">607</div><div class="text-[11px] text-gray-500">search + fetch + extract cycles</div></div>
@@ -112,9 +126,9 @@
   </section>
 
   <section class="card p-6">
-    <h2 class="text-xl font-bold mb-4">Verification &amp; How Accuracy Improved</h2>
-    <p class="text-gray-400 text-sm mb-5">The agent's first pass was <em>not</em> trustworthy. Accuracy came from finding and fixing
-    specific failure modes, each caught by reading real docs by hand and comparing them to what the agent claimed.</p>
+    <h2 class="text-xl font-bold mb-1">The first version was wrong a lot</h2>
+    <p class="text-gray-400 text-sm mb-5">Not wrong in a way that looked wrong. It produced clean, plausible, well-formatted
+    answers that happened to be false. Each fix below came from opening the real documentation and finding a row that did not match it.</p>
     <div class="overflow-auto border border-[#22262f] rounded-lg mb-6">
       <table class="w-full text-sm">
         <thead><tr class="text-left text-gray-400 border-b border-[#22262f]">
@@ -148,9 +162,9 @@
   </section>
 
   <section class="card p-6 border-l-4 border-l-amber-500">
-    <h2 class="text-xl font-bold mb-2">Where A Human Was Needed</h2>
-    <p class="text-gray-400 text-sm mb-5">The agent is a research accelerator, not an oracle. These judgements could not be automated,
-    and pretending otherwise would be the most dangerous thing in this report.</p>
+    <h2 class="text-xl font-bold mb-2">What the agent could not do on its own</h2>
+    <p class="text-gray-400 text-sm mb-5">It saved days of reading. It did not replace the reading. Six places where the work
+    only came out right because a person intervened, and the report would be worth less if it pretended otherwise.</p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
       <div class="card p-4"><div class="font-semibold text-amber-300 mb-1">1. Diagnosing the rate limit</div>
         <span class="text-gray-400">The agent's own error message (<code>RateLimitError</code>) pointed at the wrong cause. A human had to
@@ -178,7 +192,10 @@
 
   <section class="card p-6">
     <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
-      <h2 class="text-xl font-bold">All 100 Apps</h2>
+      <div>
+        <h2 class="text-xl font-bold">Every app, with the link it came from</h2>
+        <p class="text-gray-500 text-sm mt-1">Search or filter. Hover an MCP cell to see where that server was found.</p>
+      </div>
       <div class="flex gap-2 flex-wrap">
         <input id="search" placeholder="Filter by name..." class="bg-[#0b0d12] border border-[#22262f] rounded px-3 py-1.5 text-sm">
         <select id="categoryFilter" class="bg-[#0b0d12] border border-[#22262f] rounded px-3 py-1.5 text-sm"><option value="">All categories</option></select>
@@ -205,7 +222,18 @@
     </div>
   </section>
 
-  <footer class="text-gray-600 text-xs pb-8">Generated by src/html/generate.py from data/results.json, data/patterns.json, data/verification_report.json.</footer>
+  <footer class="card p-6 mb-8">
+    <h2 class="text-lg font-bold mb-2">Source code</h2>
+    <p class="text-gray-400 text-sm mb-4 max-w-3xl">The agent, the ground-truth data and the scoring script are all in the
+    repository. The accuracy figures on this page regenerate with <code>python -m src.verification.verify</code>, so they can
+    be checked rather than taken on trust.</p>
+    <a href="https://github.com/AI-Mercenary/app-research-agent" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 bg-[#1b1f28] hover:bg-[#232834] border border-[#2a2f3a] rounded-lg px-4 py-2.5 text-sm font-medium transition-colors">
+      <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      github.com/AI-Mercenary/app-research-agent
+    </a>
+    <p class="text-gray-600 text-xs mt-4">Static page — the data is embedded, nothing is fetched at view time.</p>
+  </footer>
 </div>
 
 <script>
@@ -222,11 +250,11 @@ const easyCount  = rows.filter(r => r.buildable_today === 'yes_easy').length;
 const mcpCount   = rows.filter(r => r.has_mcp === true).length;
 const selfServe  = rows.filter(r => r.self_serve === true).length;
 const scorecard = [
-  ['Apps researched', researched, 'across 10 categories'],
-  ['With usable evidence', withData, 'confidence > 0'],
-  ['Easy to build today', easyCount, 'self-serve + good docs'],
-  ['Already have an MCP', mcpCount, 'the rest is open surface'],
-  ['Self-serve credentials', selfServe, 'no sales call needed'],
+  ['Apps researched', researched, '10 categories, 10 each'],
+  ['Backed by a source', withData, 'every row keeps its link'],
+  ['Easy to build today', easyCount, 'key in hand, docs usable'],
+  ['MCP already exists', mcpCount, 'though not all are official'],
+  ['No sales call needed', selfServe, 'you can start this afternoon'],
 ];
 document.getElementById('scorecard').innerHTML = scorecard.map(([label,val,sub]) => `
   <div class="card p-4">
@@ -285,7 +313,12 @@ function makeChart(id, labels, data, type='doughnut') {
   new Chart(document.getElementById(id), {
     type,
     data: { labels, datasets: [{ data, backgroundColor: palette, borderWidth: 0 }] },
-    options: { plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: {size: 10} } } } }
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '58%',
+      plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8', boxWidth: 8, padding: 7, font: {size: 9} } } }
+    }
   });
 }
 makeChart('authChart', Object.keys(PATTERNS.auth_distribution||{}), Object.values(PATTERNS.auth_distribution||{}));
@@ -300,13 +333,22 @@ const gatedRates = catLabels.map(cat => {
   const gated = (dist.paid_plan_required||0) + (dist.sales_contact_required||0);
   return Math.round(100*gated/total);
 });
+const shortCat = c => c.replace(/ and .*/,'').replace('Developer, Infra','Dev/Infra').replace('Productivity, Project Management','Productivity').slice(0,18);
 new Chart(document.getElementById('categoryChart'), {
   type: 'bar',
-  data: { labels: catLabels, datasets: [{ label: '% gated (paid/sales)', data: gatedRates, backgroundColor: '#f472b6' }] },
+  data: { labels: catLabels.map(shortCat), datasets: [{ data: gatedRates, backgroundColor: '#f472b6', borderRadius: 3, barThickness: 8 }] },
   options: {
     indexAxis: 'y',
-    plugins: { legend: { display: false } },
-    scales: { x: { ticks: { color:'#94a3b8' } }, y: { ticks: { color:'#94a3b8', font:{size:10} } } }
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { title: items => catLabels[items[0].dataIndex], label: v => v.raw + '% gated' } }
+    },
+    scales: {
+      x: { ticks: { color:'#64748b', font:{size:9}, callback: v => v + '%' }, grid: { color:'#1a1d24' } },
+      y: { ticks: { color:'#94a3b8', font:{size:9} }, grid: { display:false } }
+    }
   }
 });
 
