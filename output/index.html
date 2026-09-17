@@ -16,7 +16,9 @@
   ::-webkit-scrollbar-thumb { background:#2a2f3a; border-radius:8px; }
   table th { position: sticky; top:0; background:#12151c; }
   .badge { padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600; }
-  .chart-box { position:relative; height:170px; }
+  .chart-box { position:relative; height:210px; }
+  .bar-box { position:relative; height:300px; }
+  .step-icon { width:34px; height:34px; border-radius:9px; background:#1b1f2b; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; color:#818cf8; }
   .lede { font-size:1.05rem; line-height:1.75; }
   h2 { letter-spacing:-0.01em; }
 </style>
@@ -25,7 +27,7 @@
 <div class="max-w-6xl mx-auto space-y-10">
 
   <header class="space-y-4">
-    <div class="text-xs uppercase tracking-[0.2em] text-indigo-400 font-semibold">API ecosystem research &middot; 100 apps</div>
+    <div class="text-xs uppercase tracking-[0.2em] text-indigo-400 font-semibold">100 apps &middot; 10 categories &middot; one question each</div>
     <h1 class="text-3xl md:text-[2.6rem] font-bold leading-tight">Which of these 100 apps<br class="hidden md:block"> can we actually connect to?</h1>
     <p class="text-gray-400 lede max-w-3xl">Before anyone builds a connector, someone has to find out how an app's API
     works, whether you can get a key without talking to sales, and whether somebody has already built an MCP server for it.
@@ -42,22 +44,25 @@
     <ul id="insights" class="space-y-2 text-gray-200"></ul>
   </section>
 
-  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-    <div class="card p-4">
-      <h3 class="text-sm font-semibold mb-2 text-gray-300">How you authenticate</h3>
-      <div class="chart-box"><canvas id="authChart"></canvas></div>
+  <section class="space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="card p-5">
+        <h3 class="text-sm font-semibold mb-3 text-gray-300">How you authenticate</h3>
+        <div class="chart-box"><canvas id="authChart"></canvas></div>
+      </div>
+      <div class="card p-5">
+        <h3 class="text-sm font-semibold mb-3 text-gray-300">How you get access</h3>
+        <div class="chart-box"><canvas id="accessChart"></canvas></div>
+      </div>
+      <div class="card p-5">
+        <h3 class="text-sm font-semibold mb-3 text-gray-300">Could we build it today</h3>
+        <div class="chart-box"><canvas id="buildableChart"></canvas></div>
+      </div>
     </div>
-    <div class="card p-4">
-      <h3 class="text-sm font-semibold mb-2 text-gray-300">How you get access</h3>
-      <div class="chart-box"><canvas id="accessChart"></canvas></div>
-    </div>
-    <div class="card p-4">
-      <h3 class="text-sm font-semibold mb-2 text-gray-300">Could we build it today</h3>
-      <div class="chart-box"><canvas id="buildableChart"></canvas></div>
-    </div>
-    <div class="card p-4">
-      <h3 class="text-sm font-semibold mb-2 text-gray-300">Gated, by category</h3>
-      <div class="chart-box"><canvas id="categoryChart"></canvas></div>
+    <div class="card p-5">
+      <h3 class="text-sm font-semibold mb-1 text-gray-300">How much of each category is gated</h3>
+      <p class="text-gray-500 text-xs mb-4">Share of apps that need a paid plan or a sales conversation before you can call the API.</p>
+      <div class="bar-box"><canvas id="categoryChart"></canvas></div>
     </div>
   </section>
 
@@ -83,11 +88,31 @@
     Nothing here is a language model recalling what it knows about Stripe — every field is read off a page that was fetched
     during the run, and every row keeps the link it came from.</p>
     <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-center text-sm">
-      <div class="card p-4"><div class="text-2xl mb-1">🔎</div>Two searches<br><span class="text-gray-500 text-xs"><strong class="text-indigo-300">Composio MCP</strong> <code>COMPOSIO_SEARCH_WEB</code> — one query for API docs, a separate one for MCP, so neither crowds the other out</span></div>
-      <div class="card p-4"><div class="text-2xl mb-1">📄</div>Fetch Docs<br><span class="text-gray-500 text-xs"><strong class="text-indigo-300">Composio MCP</strong> <code>SEARCH_FETCH_URL_CONTENT</code> (server-side, beats bot-blocks), else httpx + BeautifulSoup</span></div>
-      <div class="card p-4"><div class="text-2xl mb-1">🧠</div>Extract<br><span class="text-gray-500 text-xs">Groq <code>gpt-oss-120b</code> forced tool-call into <code>save_app_research()</code> &rarr; Pydantic-validated</span></div>
-      <div class="card p-4"><div class="text-2xl mb-1">✅</div>Self-critique<br><span class="text-gray-500 text-xs">Confidence &ge; 0.6? else re-search with a refined query (max 2 retries)</span></div>
-      <div class="card p-4"><div class="text-2xl mb-1">💾</div>Save<br><span class="text-gray-500 text-xs">Incremental write, so the run is resumable after any crash</span></div>
+      <div class="card p-4">
+        <div class="step-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+        <div class="font-medium">Two searches</div>
+        <span class="text-gray-500 text-xs">One query for the API docs, a separate one for MCP, so neither crowds the other out</span>
+      </div>
+      <div class="card p-4">
+        <div class="step-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
+        <div class="font-medium">Fetch the pages</div>
+        <span class="text-gray-500 text-xs">Fetched through Composio's servers, which also gets past sites that block a local scraper</span>
+      </div>
+      <div class="card p-4">
+        <div class="step-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div>
+        <div class="font-medium">Read the facts out</div>
+        <span class="text-gray-500 text-xs">The model must call <code>save_app_research()</code>; a schema rejects anything malformed</span>
+      </div>
+      <div class="card p-4">
+        <div class="step-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3.5-7.1"/><path d="m9 11 3 3 8-8"/></svg></div>
+        <div class="font-medium">Mark its own work</div>
+        <span class="text-gray-500 text-xs">Below 0.6 confidence it discards the answer and searches again, up to twice</span>
+      </div>
+      <div class="card p-4">
+        <div class="step-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg></div>
+        <div class="font-medium">Write it down</div>
+        <span class="text-gray-500 text-xs">Saved after every app, so a crash costs one app rather than the whole run</span>
+      </div>
     </div>
     <div class="mt-6 border-t border-[#22262f] pt-5">
       <h3 class="font-semibold mb-1">It really ran, and here is the receipt</h3>
@@ -350,21 +375,25 @@ const gatedRates = catLabels.map(cat => {
   const gated = (dist.paid_plan_required||0) + (dist.sales_contact_required||0);
   return Math.round(100*gated/total);
 });
-const shortCat = c => c.replace(/ and .*/,'').replace('Developer, Infra','Dev/Infra').replace('Productivity, Project Management','Productivity').slice(0,18);
+const catOrder = catLabels.map((c,i) => [c, gatedRates[i]]).sort((a,b) => b[1]-a[1]);
 new Chart(document.getElementById('categoryChart'), {
   type: 'bar',
-  data: { labels: catLabels.map(shortCat), datasets: [{ data: gatedRates, backgroundColor: '#f472b6', borderRadius: 3, barThickness: 8 }] },
+  data: {
+    labels: catOrder.map(c => c[0]),
+    datasets: [{ data: catOrder.map(c => c[1]), backgroundColor: '#f472b6', borderRadius: 4, barThickness: 14 }]
+  },
   options: {
     indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
+    layout: { padding: { right: 10 } },
     plugins: {
       legend: { display: false },
-      tooltip: { callbacks: { title: items => catLabels[items[0].dataIndex], label: v => v.raw + '% gated' } }
+      tooltip: { callbacks: { label: v => v.raw + '% gated' } }
     },
     scales: {
-      x: { ticks: { color:'#64748b', font:{size:9}, callback: v => v + '%' }, grid: { color:'#1a1d24' } },
-      y: { ticks: { color:'#94a3b8', font:{size:9} }, grid: { display:false } }
+      x: { ticks: { color:'#64748b', font:{size:10}, callback: v => v + '%' }, grid: { color:'#1a1d24' }, border: { display:false } },
+      y: { ticks: { color:'#cbd5e1', font:{size:11} }, grid: { display:false }, border: { display:false } }
     }
   }
 });
