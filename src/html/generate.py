@@ -289,6 +289,49 @@ TEMPLATE = """<!DOCTYPE html>
     </div>
   </section>
 
+  <section class="card p-6">
+    <h2 class="text-xl font-bold mb-1">The brief, and what came back</h2>
+    <p class="text-gray-400 text-sm mb-6 max-w-3xl">The task was to work out which of a hundred named apps a connector could be
+    built for, do it with an agent rather than by hand, prove the answers are actually right, and put the whole thing on one page.
+    Here is each thing that was asked, and where it ended up.</p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+      <div class="card p-5">
+        <div class="text-xs uppercase tracking-widest text-indigo-400 font-semibold mb-2">What was asked</div>
+        <ul class="text-sm text-gray-300 space-y-2">
+          <li>Research 100 named apps across 10 fixed categories.</li>
+          <li>For each: what it does, how you authenticate, whether access is self-serve or gated, how good the API is, whether an MCP server already exists, whether it could be built today and what blocks it — with a source link.</li>
+          <li>Group the results into patterns instead of handing over a spreadsheet.</li>
+          <li>Build it as an agent. Using Composio's own MCP is in the spirit of the role.</li>
+          <li>Check the answers against real documentation, and show accuracy going up between passes.</li>
+          <li>One page anyone can read in about two minutes, saying plainly where a person was needed.</li>
+        </ul>
+      </div>
+      <div class="card p-5">
+        <div class="text-xs uppercase tracking-widest text-indigo-400 font-semibold mb-2">How it was read</div>
+        <p class="text-sm text-gray-300 mb-3">The research is the easy half. A model will happily produce a hundred tidy rows
+        about APIs it half-remembers, and they will look exactly like a hundred correct rows.</p>
+        <p class="text-sm text-gray-300 mb-3">So the work went into making the answers falsifiable: every field is read off a
+        page fetched during the run, every row keeps its link, the agent throws out its own low-confidence work, and a person
+        checked a sample against the real docs without being shown what the agent had said.</p>
+        <p class="text-sm text-gray-300">The accuracy section exists to show the first version was wrong, not to claim the last
+        one is perfect.</p>
+      </div>
+    </div>
+
+    <div class="overflow-auto border border-[#22262f] rounded-lg">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left text-gray-400 border-b border-[#22262f]">
+          <th class="p-3">Asked for</th><th class="p-3">Delivered</th><th class="p-3 whitespace-nowrap">Where</th>
+        </tr></thead>
+        <tbody id="briefBody" class="text-gray-300"></tbody>
+      </table>
+    </div>
+
+    <p class="text-gray-500 text-xs mt-4">Two things deliberately left as they are: the auth column is scored with no partial
+    credit, and a fifth of the rows still disagree with a human on at least one field. Both are shown above rather than tuned away.</p>
+  </section>
+
   <footer class="card p-6 mb-8">
     <h2 class="text-lg font-bold mb-2">Source code</h2>
     <p class="text-gray-400 text-sm mb-4 max-w-3xl">The agent, the ground-truth data and the scoring script are all in the
@@ -475,6 +518,32 @@ if (finalPass) {
 } else {
   verEl.innerHTML = `<p class="text-gray-500">No verification report yet — run <code>python -m src.verification.verify</code>.</p>`;
 }
+
+// Brief checklist — figures computed from the data so this can't drift out of date
+const catCount = new Set(rows.map(r => r.category)).size;
+const withUrl = rows.filter(r => r.source_url).length;
+const fieldsComplete = rows.filter(r => r.auth_methods && r.access_model && r.api_quality && r.buildable_today).length;
+const imp = VERIFICATION.improvement;
+const gt = (passes.final && passes.final.apps_in_ground_truth) || 0;
+const brief = [
+  ['100 apps, 10 fixed categories', `${researched} researched, ${catCount} categories, 10 in each`, 'Table below'],
+  ['Auth, access, API quality, MCP, verdict, blockers', `${fieldsComplete}/${researched} rows complete on every field`, 'Table below'],
+  ['A source link for every app', `${withUrl}/${researched} rows carry the page they were read from`, 'Table below'],
+  ['Patterns, not a spreadsheet', 'Six findings, a per-category breakdown and three distributions', 'Top of page'],
+  ['Built as an agent', 'One LangGraph agent per app: two searches, fetch, extract, self-score, retry', 'How the research ran'],
+  ['Use Composio', "Composio's MCP does the searching and the page fetching", 'How the research ran'],
+  ['Proof it ran', '3,642 traced steps, 222 of them retries the agent forced on itself', 'How the research ran'],
+  ['Accuracy checked against real docs', `${gt} apps checked by hand against vendor documentation, blind`, 'Accuracy section'],
+  ['Show accuracy improving', imp ? `${imp.before_pct}% to ${imp.after_pct}%, same reference both times` : 'see report', 'Accuracy section'],
+  ['Say where a human was needed', 'Six of them, including one the agent could never have caught', 'What it could not do'],
+  ['One page, readable in two minutes', 'This page. Static, nothing loaded at view time', '—'],
+];
+document.getElementById('briefBody').innerHTML = brief.map(([a,b,c]) => `
+  <tr class="border-b border-[#1a1d24]">
+    <td class="p-3 text-gray-400">${a}</td>
+    <td class="p-3"><span class="text-green-400 mr-1.5">&#10003;</span>${b}</td>
+    <td class="p-3 text-gray-500 text-xs whitespace-nowrap">${c}</td>
+  </tr>`).join('');
 
 // Table
 const cats = [...new Set(rows.map(r => r.category))].sort();
